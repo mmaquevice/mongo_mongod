@@ -38,12 +38,12 @@
 - name: Create the data directory for the mongod
   file: path={{ mongod_datadir_prefix }} owner={{ mongo_user }} group={{ mongo_group }} state=directory
 
-- name: Install the mongodb package
+- name: Install the mongodb package (Redhat)
   yum: name={{ item }} state=installed
   with_items: mongod_pkgs
   when: ansible_os_family == "RedHat"
 
-- name: Install the mongodb package
+- name: Install the mongodb package (Debian)
   apt: name={{ item }} state=installed update_cache=yes
   with_items: mongod_pkgs
   when: ansible_os_family == "Debian"
